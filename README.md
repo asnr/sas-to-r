@@ -65,7 +65,7 @@ run;
 ```
 
 ```r
-mydata.myvar.describe()
+
 ```
 
 
@@ -79,6 +79,30 @@ run;
 
 ```r
 
+```
+
+`proc sort`
+-----------
+
+#### find duplicated rows ####
+
+```SAS
+proc sort data=mydata NODUPKEY out=_null_ dupout=dups; by _all_; run;
+```
+
+```r
+dups = duplicated(mydata)
+```
+
+
+#### find duplicated values ####
+
+```SAS
+proc sort data=mydata NODUPKEY out=_null_ dupout=dups; by myvar; run;
+```
+
+```r
+dups = duplicated(mydata$myvar)
 ```
 
 
