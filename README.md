@@ -156,5 +156,5 @@ Misc
 ```
 
 ```r
-
+nrow(mydata)  # or NROW(mydata)
 ```
