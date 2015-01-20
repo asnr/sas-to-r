@@ -11,7 +11,7 @@ run;
 ```
 
 ```r
-# Here save_lib is a string representing a directory. '.RData' is sometimes replaced with '.rda'
+# Here save_lib is a string representing a directory. '.rda' is sometimes used instead of '.RData'
 save(in_lib, file=paste(save_lib, "save_ds.RData", sep=""))
 ```
 
