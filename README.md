@@ -26,7 +26,7 @@ run;
 ```
 
 ```r
-
+table(mydata$myvar)
 ```
 
 
@@ -38,20 +38,45 @@ run;
 ```
 
 ```r
-
+sort(table(mydata$myvar), decreasing=TRUE)
 ```
 
 
 #### with missing ####
 
 ```SAS
-proc freq order=freq data=mydata;
+proc freq data=mydata;
     tables myvar / nocol nopercent nocum missing;
 run;
 ```
 
 ```r
+table(mydata$myvar, useNA="ifany")  # only displays NA count if positive, to always include use "always"
+```
 
+#### percentages, missing & sorted by frequency ####
+
+```SAS
+proc freq data=mydata;
+    tables myvar / nocol nopercent nocum missing;
+run;
+```
+
+```r
+# no concise way to combine counts w/ percentages core R
+counts = sort(table(mydata$myvar, useNA="ifany"), decreasing=True)
+counts
+prop.table(counts)
+
+# we can do better with dplyr
+library(dplyr)
+pfreq <- function(...) {
+    group_by(...) %>%
+        summarise(n=n()) %>%
+        mutate(perc=paste0(round(100 * n/sum(n), 1), "%")) %>%
+        arrange(desc(n))
+}
+pfreq(mydata, myvar)
 ```
 
 
