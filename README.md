@@ -12,7 +12,7 @@ run;
 
 ```r
 # Here save_lib is a string representing a directory. '.rda' is sometimes used instead of '.RData'
-save(in_lib, file=paste(save_lib, "save_ds.RData", sep=""))
+save(in_ds, file=paste(save_lib, "save_ds.RData", sep=""))
 ```
 
 
@@ -63,7 +63,7 @@ run;
 ```
 
 ```r
-# no concise way to combine counts w/ percentages core R
+# no concise way to combine counts w/ percentages in core R
 counts = sort(table(mydata$myvar, useNA="ifany"), decreasing=True)
 counts
 prop.table(counts)
