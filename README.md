@@ -12,7 +12,9 @@ run;
 
 ```r
 # Here save_lib is a string representing a directory. '.rda' is sometimes used instead of '.RData'
-save(in_ds, file=paste(save_lib, "save_ds.RData", sep=""))
+save(in_ds, file=paste0(save_lib, "save_ds.RData"))
+# To load in_ds back into the environment
+load(paste0(save_lib, "save_ds.RData"))
 ```
 
 
@@ -53,6 +55,7 @@ run;
 ```r
 table(mydata$myvar, useNA="ifany")  # only displays NA count if positive, to always include use "always"
 ```
+
 
 #### percentages, missing & sorted by frequency ####
 
@@ -105,6 +108,7 @@ run;
 ```r
 
 ```
+
 
 `proc sort`
 -----------
@@ -171,6 +175,7 @@ run;
 ```r
 
 ```
+
 
 #### save output ####
 
