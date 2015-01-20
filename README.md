@@ -84,13 +84,13 @@ pfreq(mydata, myvar)
 ------------
 
 ```SAS
-proc means data=mydata n mean std min max p25 median p75;
+proc means data=mydata min p25 median mean p75 max;
     var myvar;
 run;
 ```
 
 ```r
-
+summary(mydata$myvar)
 ```
 
 
@@ -108,6 +108,19 @@ run;
 
 `proc sort`
 -----------
+
+```SAS
+proc sort data=in_data out=out_data; by myvar1 descending myvar2; run;
+```
+
+```r
+out_data = in_data[with(in_data, order(myvar1, -myvar2)), ]
+
+# with dplyr
+library(dplyr)
+out_data = arrange(in_data, myvar1, desc(myvar2))
+```
+
 
 #### find duplicated rows ####
 
