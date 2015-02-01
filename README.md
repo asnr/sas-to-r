@@ -11,7 +11,8 @@ run;
 ```
 
 ```r
-# Here save_lib is a string representing a directory. '.rda' is sometimes used instead of '.RData'
+# Here save_lib is a string representing a directory. '.rda' is 
+# sometimes used instead of '.RData'
 save(in_ds, file=paste0(save_lib, "save_ds.RData"))
 # To load in_ds back into the environment
 load(paste0(save_lib, "save_ds.RData"))
@@ -53,7 +54,8 @@ run;
 ```
 
 ```r
-table(mydata$myvar, useNA="ifany")  # only displays NA count if positive, to always include use "always"
+# only displays NA count if positive, to always include use "always"
+table(mydata$myvar, useNA="ifany")
 ```
 
 
@@ -160,7 +162,14 @@ run;
 ```
 
 ```r
+# Note that if a factor variable in the two dataframes has different
+# levels, then rbind will take the union of these levels
+# while row_bind will coerce the variable to string.
+concatenated = rbind(mydata1, mydata2)
 
+# or with dplyr
+library(dplyr);
+concatenated = row_bind(mydata1, mydata2)
 ```
 
 
