@@ -1,6 +1,11 @@
 SAS to R guide
 ==============
 
+Reading instructions: 
+*   under each subheading, the first code block is SAS and the second code block is the R translation;
+*   ctrl+F is your friend.
+
+
 Save data to disk
 -----------------
 
