@@ -27,8 +27,8 @@ library(dplyr)
 concatenated = row_bind(mydata1, mydata2)
 ```
 
+
 #### Save data to disk ####
------------------
 
 ```SAS
 data save_lib.save_ds;
@@ -197,7 +197,7 @@ dups = duplicated(mydata$myvar)
 ---------------
 
 ```SAS
-`proc print data=mydata (obs=6);
+proc print data=mydata (obs=6);
 run;
 ```
 
@@ -239,7 +239,7 @@ proc format;
 value agefmt
 15-<21 = "15-20"
 21-<25 = "21-24"
-25-high "25+"
+25-high = "25+"
 ;
 run;
 data out_ds;
@@ -250,14 +250,10 @@ run;
 ```
 
 ```r
-# with plyr
-library(plyr)
-out_ds <- plyr::mutate(in_ds,
-              age.f = cut(age, 
-                          breaks=c(15, 21, 25, Inf), right=FALSE,
-                          labels=c("15-20","21-24","25+"), 
-                          ordered_result=TRUE)
-
+out_ds$age_f = cut(out_ds$age, 
+				breaks=c(15, 21, 25, Inf), right=FALSE,
+                     labels=c("15-20","21-24","25+"), 
+                     ordered_result=TRUE)
 ```
 
 
