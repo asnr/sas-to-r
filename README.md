@@ -5,9 +5,30 @@ Reading instructions:
 *   under each subheading, the first code block is SAS and the second code block is the R translation;
 *   ctrl+F is your friend.
 
+`data` step
+-----------
 
-Save data to disk
------------------
+#### concatenate datasets ####
+
+```SAS
+data concatenated;
+    set mydata1 mydata2;
+run;
+```
+
+```r
+# Note that if a factor variable in the two dataframes has different
+# levels, then rbind will take the union of these levels
+# while row_bind will coerce the variable to string.
+concatenated = rbind(mydata1, mydata2)
+
+# or with dplyr
+library(dplyr)
+concatenated = row_bind(mydata1, mydata2)
+```
+
+
+#### Save data to disk ####
 
 ```SAS
 data save_lib.save_ds;
@@ -22,6 +43,23 @@ save(in_ds, file=paste0(save_lib, "save_ds.RData"))
 # To load in_ds back into the environment
 load(paste0(save_lib, "save_ds.RData"))
 ```
+
+#### Filter data or 'where' statement ####
+
+
+```SAS
+data out_ds;
+    set in_ds;
+	where GENDER ='M' and age >= 18;
+run;
+```
+
+```r
+# with dplyr
+library(dplyr)
+out_ds<-dplyr::filter(in_ds,GENDER == 'M', age >= 18)
+```
+
 
 
 `proc freq`
@@ -113,7 +151,7 @@ run;
 ```
 
 ```r
-
+quantile(mydata$myvar, c(0,0.01, 0.05, 0.1,0.25,0.5,0.75,0.9,  0.95, 0.99,1))
 ```
 
 
@@ -155,27 +193,18 @@ dups = duplicated(mydata$myvar)
 ```
 
 
-`data` step
------------
-
-#### concatenate datasets ####
+`proc print`
+---------------
 
 ```SAS
-data concatenated;
-    set mydata1 mydata2;
+proc print data=mydata (obs=6);
 run;
 ```
 
 ```r
-# Note that if a factor variable in the two dataframes has different
-# levels, then rbind will take the union of these levels
-# while row_bind will coerce the variable to string.
-concatenated = rbind(mydata1, mydata2)
-
-# or with dplyr
-library(dplyr);
-concatenated = row_bind(mydata1, mydata2)
+head(mydata)
 ```
+
 
 
 `proc contents`
@@ -187,7 +216,7 @@ run;
 ```
 
 ```r
-
+str(mydata)
 ```
 
 
@@ -199,7 +228,32 @@ run;
 ```
 
 ```r
+contents=str(mydata)
+```
 
+`proc format`
+---------------
+#### transform values according to a format ####
+```SAS
+proc format;
+value agefmt
+15-<21 = "15-20"
+21-<25 = "21-24"
+25-high = "25+"
+;
+run;
+data out_ds;
+set in_ds;
+age_grouped=put(age,agefmt.);
+
+run;
+```
+
+```r
+out_ds$age_f = cut(out_ds$age, 
+				breaks=c(15, 21, 25, Inf), right=FALSE,
+                     labels=c("15-20","21-24","25+"), 
+                     ordered_result=TRUE)
 ```
 
 
@@ -214,4 +268,37 @@ Misc
 
 ```r
 nrow(mydata)  # or NROW(mydata)
+dim(mydata)	# lists the row number and the number of variables in a dataset
+
+```
+
+
+#### capping a number ####
+
+```SAS
+
+
+```
+
+```r
+cap <- function(x, xmin= -Inf, xmax= Inf){
+  # x = value to be capped (numeric, vectorised)
+  # xmin = lower bound to be imposed on x (numeric)
+  # xmax = upper bound to be imposed on x (numeric)
+  pmax(xmin, pmin(x, xmax))
+  }
+mydata$number_capped<-cap(mydata$number,10,200000)
+
+```
+
+#### linear models ####
+
+```SAS
+
+
+```
+
+```r
+library(mgcv)
+fit <- gam(response ~ predictor,data=in_ds)
 ```
