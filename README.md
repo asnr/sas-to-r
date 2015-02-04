@@ -3,7 +3,7 @@ SAS to R guide
 
 Reading instructions: 
 *   under each subheading, the first code block is SAS and the second code block is the R translation;
-*   ctrl+F is your friend.
+*   <kbd>ctrl</kbd>+<kbd>F</kbd> is your friend.
 
 `data` step
 -----------
