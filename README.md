@@ -8,6 +8,23 @@ Reading instructions:
 `data` step
 -----------
 
+#### Save data to disk ####
+
+```SAS
+data save_lib.save_ds;
+    set in_lib.in_ds;
+run;
+```
+
+```r
+# Here save_lib is a string representing a directory. '.rda' is 
+# sometimes used instead of '.RData'
+save(in_ds, file=paste0(save_lib, "save_ds.RData"))
+# To load in_ds back into the environment
+load(paste0(save_lib, "save_ds.RData"))
+```
+
+
 #### concatenate datasets ####
 
 ```SAS
@@ -28,24 +45,7 @@ concatenated = row_bind(mydata1, mydata2)
 ```
 
 
-#### Save data to disk ####
-
-```SAS
-data save_lib.save_ds;
-    set in_lib.in_ds;
-run;
-```
-
-```r
-# Here save_lib is a string representing a directory. '.rda' is 
-# sometimes used instead of '.RData'
-save(in_ds, file=paste0(save_lib, "save_ds.RData"))
-# To load in_ds back into the environment
-load(paste0(save_lib, "save_ds.RData"))
-```
-
 #### Filter data or 'where' statement ####
-
 
 ```SAS
 data out_ds;
@@ -220,7 +220,7 @@ str(mydata)
 ```
 
 
-#### save output ####
+#### Save output ####
 
 ```SAS
 proc contents noprint data=mydata out=contents;
@@ -233,27 +233,29 @@ contents=str(mydata)
 
 `proc format`
 ---------------
-#### transform values according to a format ####
+
+#### Transform values according to a format ####
 ```SAS
 proc format;
-value agefmt
-15-<21 = "15-20"
-21-<25 = "21-24"
-25-high = "25+"
-;
+	value agefmt
+	15-<21 = "15-20"
+	21-<25 = "21-24"
+	25-high = "25+"
+	;
 run;
-data out_ds;
-set in_ds;
-age_grouped=put(age,agefmt.);
 
+data out_ds;
+	set in_ds;
+	age_grouped=put(age,agefmt.);
 run;
 ```
 
 ```r
 out_ds$age_f = cut(out_ds$age, 
-				breaks=c(15, 21, 25, Inf), right=FALSE,
-                     labels=c("15-20","21-24","25+"), 
-                     ordered_result=TRUE)
+				   breaks=c(15, 21, 25, Inf),
+				   right=FALSE,
+                   labels=c("15-20", "21-24", "25+"), 
+                   ordered_result=TRUE)
 ```
 
 
@@ -268,8 +270,7 @@ Misc
 
 ```r
 nrow(mydata)  # or NROW(mydata)
-dim(mydata)	# lists the row number and the number of variables in a dataset
-
+dim(mydata)   # lists the row number and the number of variables in a dataset
 ```
 
 
@@ -282,19 +283,17 @@ dim(mydata)	# lists the row number and the number of variables in a dataset
 
 ```r
 cap <- function(x, xmin= -Inf, xmax= Inf){
-  # x = value to be capped (numeric, vectorised)
-  # xmin = lower bound to be imposed on x (numeric)
-  # xmax = upper bound to be imposed on x (numeric)
-  pmax(xmin, pmin(x, xmax))
-  }
+	# x = value to be capped (numeric, vectorised)
+	# xmin = lower bound to be imposed on x (numeric)
+	# xmax = upper bound to be imposed on x (numeric)
+	pmax(xmin, pmin(x, xmax))
+}
 mydata$number_capped<-cap(mydata$number,10,200000)
-
 ```
 
 #### linear models ####
 
 ```SAS
-
 
 ```
 
