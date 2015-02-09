@@ -238,15 +238,16 @@ contents=str(mydata)
 ```SAS
 proc format;
 	value agefmt
-	15-<21 = "15-20"
-	21-<25 = "21-24"
+	15-<21  = "15-20"
+	21-<25  = "21-24"
 	25-high = "25+"
+	other   = " "
 	;
 run;
 
 data out_ds;
 	set in_ds;
-	age_grouped=put(age,agefmt.);
+	age_grouped=put(age, agefmt.);
 run;
 ```
 
