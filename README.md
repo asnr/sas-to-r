@@ -25,7 +25,7 @@ load(paste0(save_lib, "save_ds.RData"))
 ```
 
 
-#### concatenate datasets ####
+#### Concatenate datasets ####
 
 ```SAS
 data concatenated;
@@ -41,7 +41,7 @@ concatenated = rbind(mydata1, mydata2)
 
 # or with dplyr
 library(dplyr)
-concatenated = row_bind(mydata1, mydata2)
+concatenated = bind_rows(mydata1, mydata2)
 ```
 
 
