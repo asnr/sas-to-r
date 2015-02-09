@@ -50,14 +50,14 @@ concatenated = bind_rows(mydata1, mydata2)
 ```SAS
 data out_ds;
     set in_ds;
-	where GENDER ='M' and age >= 18;
+    where gender ='M' and age >= 18;
 run;
 ```
 
 ```r
 # with dplyr
 library(dplyr)
-out_ds<-dplyr::filter(in_ds,GENDER == 'M', age >= 18)
+out_ds = filter(in_ds, gender == 'M', age >= 18)
 ```
 
 
@@ -118,7 +118,7 @@ prop.table(counts)
 
 # we can do better with dplyr
 library(dplyr)
-pfreq <- function(...) {
+pfreq = function(...) {
     group_by(...) %>%
         summarise(n=n()) %>%
         mutate(perc=paste0(round(100 * n/sum(n), 1), "%")) %>%
@@ -194,7 +194,7 @@ dups = duplicated(mydata$myvar)
 
 
 `proc print`
----------------
+------------
 
 ```SAS
 proc print data=mydata (obs=6);
@@ -232,7 +232,7 @@ contents=str(mydata)
 ```
 
 `proc format`
----------------
+-------------
 
 #### Transform values according to a format ####
 ```SAS
@@ -299,5 +299,5 @@ mydata$number_capped<-cap(mydata$number,10,200000)
 
 ```r
 library(mgcv)
-fit <- gam(response ~ predictor,data=in_ds)
+fit = gam(response ~ predictor,data=in_ds)
 ```
