@@ -36,7 +36,7 @@ run;
 ```r
 # Note that if a factor variable in the two dataframes has different
 # levels, then rbind will take the union of these levels
-# while row_bind will coerce the variable to string.
+# while bind_rows will coerce the variable to string.
 concatenated = rbind(mydata1, mydata2)
 
 # or with dplyr
