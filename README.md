@@ -228,7 +228,7 @@ run;
 ```
 
 ```r
-contents=str(mydata)
+contents = str(mydata)
 ```
 
 `proc format`
@@ -253,8 +253,8 @@ run;
 
 ```r
 out_ds$age_f = cut(out_ds$age, 
-				   breaks=c(15, 21, 25, Inf),
-				   right=FALSE,
+		   breaks=c(15, 21, 25, Inf),
+		   right=FALSE,
                    labels=c("15-20", "21-24", "25+"), 
                    ordered_result=TRUE)
 ```
@@ -283,13 +283,13 @@ dim(mydata)   # lists the row number and the number of variables in a dataset
 ```
 
 ```r
-cap <- function(x, xmin= -Inf, xmax= Inf){
+cap = function(x, xmin=-Inf, xmax=Inf) {
 	# x = value to be capped (numeric, vectorised)
 	# xmin = lower bound to be imposed on x (numeric)
 	# xmax = upper bound to be imposed on x (numeric)
 	pmax(xmin, pmin(x, xmax))
 }
-mydata$number_capped<-cap(mydata$number,10,200000)
+mydata$number_capped = cap(mydata$number,10,200000)
 ```
 
 #### linear models ####
