@@ -267,7 +267,7 @@ Misc
 
 ```r
 nrow(mydata)  # or NROW(mydata)
-dim(mydata)   # lists the row number and the number of variables in a dataset
+dim(mydata)   # lists the number of rows and columns in a dataframe
 ```
 
 
@@ -285,7 +285,7 @@ cap = function(x, xmin=-Inf, xmax=Inf) {
 	# xmax = upper bound to be imposed on x (numeric)
 	pmax(xmin, pmin(x, xmax))
 }
-mydata$number_capped = cap(mydata$number,10,200000)
+mydata$number_capped = cap(mydata$number, 10, 200000)
 ```
 
 #### Linear models ####
@@ -295,5 +295,5 @@ mydata$number_capped = cap(mydata$number,10,200000)
 ```
 
 ```r
-fit = mgcv::gam(response ~ predictor,data=in_ds)
+fit = mgcv::gam(response ~ predictor, data=in_ds)
 ```
