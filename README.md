@@ -52,6 +52,8 @@ run;
 ```
 
 ```r
+out_ds = in_ds[in_ds$gender == 'M' & in_ds$age >= 18, ]
+# or with dplyr
 out_ds = dplyr::filter(in_ds, gender == 'M', age >= 18)
 ```
 
