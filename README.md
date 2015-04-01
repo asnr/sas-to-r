@@ -158,7 +158,7 @@ proc sort data=in_data out=out_data; by myvar1 descending myvar2; run;
 ```
 
 ```r
-out_data = in_data[with(in_data, order(myvar1, -myvar2)), ]
+out_data = in_data[order(in_data$myvar1, -in_data$myvar2), ]
 # or with dplyr
 out_data = dplyr::arrange(in_data, myvar1, desc(myvar2))
 ```
