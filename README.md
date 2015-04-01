@@ -185,7 +185,7 @@ proc sort data=mydata NODUPKEY out=_null_ dupout=dups; by myvar; run;
 ```
 
 ```r
-dups = duplicated(mydata$myvar)
+dups = mydata$myvar[duplicated(mydata$myvar)]
 ```
 
 
