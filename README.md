@@ -38,10 +38,7 @@ run;
 # levels, then rbind will take the union of these levels
 # while bind_rows will coerce the variable to string.
 concatenated = rbind(mydata1, mydata2)
-
-# or with dplyr
-library(dplyr)
-concatenated = bind_rows(mydata1, mydata2)
+concatenated = dplyr::bind_rows(mydata1, mydata2)
 ```
 
 
@@ -55,9 +52,7 @@ run;
 ```
 
 ```r
-# with dplyr
-library(dplyr)
-out_ds = filter(in_ds, gender == 'M', age >= 18)
+out_ds = dplyr::filter(in_ds, gender == 'M', age >= 18)
 ```
 
 
@@ -164,10 +159,8 @@ proc sort data=in_data out=out_data; by myvar1 descending myvar2; run;
 
 ```r
 out_data = in_data[with(in_data, order(myvar1, -myvar2)), ]
-
-# with dplyr
-library(dplyr)
-out_data = arrange(in_data, myvar1, desc(myvar2))
+# or with dplyr
+out_data = dplyr::arrange(in_data, myvar1, desc(myvar2))
 ```
 
 
@@ -299,6 +292,5 @@ mydata$number_capped = cap(mydata$number,10,200000)
 ```
 
 ```r
-library(mgcv)
-fit = gam(response ~ predictor,data=in_ds)
+fit = mgcv::gam(response ~ predictor,data=in_ds)
 ```
