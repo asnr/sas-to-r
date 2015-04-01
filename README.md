@@ -19,9 +19,9 @@ run;
 ```r
 # Here save_lib is a string representing a directory. '.rda' is 
 # sometimes used instead of '.RData'
-save(in_ds, file=paste0(save_lib, "save_ds.RData"))
+save(in_ds, file=file.path(save_lib, "save_ds.RData"))
 # To load in_ds back into the environment
-load(paste0(save_lib, "save_ds.RData"))
+load(file.path(save_lib, "save_ds.RData"))
 ```
 
 
