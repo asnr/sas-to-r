@@ -73,7 +73,7 @@ table(mydata$myvar)
 ```
 
 
-#### sort by frequency ####
+#### Sort by frequency ####
 ```SAS
 proc freq order=freq data=mydata;
 	tables myvar / nocol nopercent nocum;
@@ -85,7 +85,7 @@ sort(table(mydata$myvar), decreasing=TRUE)
 ```
 
 
-#### with missing ####
+#### With missing ####
 
 ```SAS
 proc freq data=mydata;
@@ -99,7 +99,7 @@ table(mydata$myvar, useNA="ifany")
 ```
 
 
-#### percentages, missing & sorted by frequency ####
+#### Percentages, missing & sorted by frequency ####
 
 ```SAS
 proc freq data=mydata;
@@ -139,7 +139,7 @@ summary(mydata$myvar)
 ```
 
 
-#### more percentiles ####
+#### More percentiles ####
 
 ```SAS
 proc means data=mydata n mean std min max p1 p5 p10 p25 median p75 p90 p95 p99;
@@ -166,7 +166,7 @@ out_data = dplyr::arrange(in_data, myvar1, desc(myvar2))
 ```
 
 
-#### find duplicated rows ####
+#### Find duplicated rows ####
 
 ```SAS
 proc sort data=mydata NODUPKEY out=_null_ dupout=dups; by _all_; run;
@@ -178,7 +178,7 @@ dups = mydata[duplicated(mydata), ]
 ```
 
 
-#### find duplicated values ####
+#### Find duplicated values ####
 
 ```SAS
 proc sort data=mydata NODUPKEY out=_null_ dupout=dups; by myvar; run;
@@ -259,7 +259,7 @@ out_ds$age_f = cut(out_ds$age,
 Misc
 ----
 
-#### number of rows in a datastep ####
+#### Number of rows in a datastep ####
 
 ```SAS
 * haha nice try. Try this for size: http://www2.sas.com/proceedings/sugi26/p095-26.pdf;
@@ -271,7 +271,7 @@ dim(mydata)   # lists the row number and the number of variables in a dataset
 ```
 
 
-#### capping a number ####
+#### Capping a number ####
 
 ```SAS
 
@@ -288,7 +288,7 @@ cap = function(x, xmin=-Inf, xmax=Inf) {
 mydata$number_capped = cap(mydata$number,10,200000)
 ```
 
-#### linear models ####
+#### Linear models ####
 
 ```SAS
 
