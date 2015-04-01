@@ -249,8 +249,8 @@ run;
 
 ```r
 out_ds$age_f = cut(out_ds$age, 
-		   breaks=c(15, 21, 25, Inf),
-		   right=FALSE,
+                   breaks=c(15, 21, 25, Inf),
+                   right=FALSE,
                    labels=c("15-20", "21-24", "25+"), 
                    ordered_result=TRUE)
 ```
