@@ -173,7 +173,8 @@ proc sort data=mydata NODUPKEY out=_null_ dupout=dups; by _all_; run;
 ```
 
 ```r
-dups = duplicated(mydata)
+dups = mydata[duplicated(mydata), ] 
+# if you want to count duplicated rows: sum(duplicated(mydata))
 ```
 
 
